@@ -1,4 +1,25 @@
 R5T.Code.VS.ProjectFile.Types - A types library for the R5T.Code.VS.ProjectFile library.
 
-Goals
 
+# Overview - Solution File
+
+* De/Serialzation is performed via a custom-built text file serializer.
+
+
+# Overview - Project File
+
+A project file is just an XML file with various nodes with various attributes.
+
+However, after reading in a file, there are two approaches taken to the in memory data-structure of the project file. Is the memory model of a project file a:
+
+1. A System.Xml.XmlDocument
+
+	* Different parts of a project file are provided as descendents of TypedXmlElement, selected by XPath expressions.
+	* De/Serialization is performed by XmlDocument.Load() and XmlDocument.Save(FileStream).
+
+2. A System.Xml.LINQ.XElement
+
+	* Different parts of a project file are provided as descendents of TypedXElement.
+	* De/Serialization is performed by XElement.Load() and XElement.Save(FileStream).
+
+Further, should this "raw" representation of the project file (really just XML-specific datastructures) be converted to some custom representation?
